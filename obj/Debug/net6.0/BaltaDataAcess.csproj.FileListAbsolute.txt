@@ -48,3 +48,4 @@ C:\Users\bruno\Documents\dotnet-projects\BaltaDataAcess\obj\Debug\net6.0\refint\
 C:\Users\bruno\Documents\dotnet-projects\BaltaDataAcess\obj\Debug\net6.0\BaltaDataAcess.pdb
 C:\Users\bruno\Documents\dotnet-projects\BaltaDataAcess\obj\Debug\net6.0\BaltaDataAcess.genruntimeconfig.cache
 C:\Users\bruno\Documents\dotnet-projects\BaltaDataAcess\obj\Debug\net6.0\ref\BaltaDataAcess.dll
+C:\Users\bruno\Documents\dotnet-projects\BaltaDataAcess\bin\Debug\net6.0\Dapper.dll
