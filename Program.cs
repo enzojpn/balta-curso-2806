@@ -10,47 +10,68 @@ const string connectionString = "Server=DELLG15\\SQLEXPRESS;Database=balta; Inte
 //const string connectionString22 = "Data Source=DELLG15\\SQLEXPRESS;Initial Catalog=balta;Database=balta;Trusted_Connection=True;";
 
 
-using (var conn = new SqlConnection(connectionString))
+using (var connection = new SqlConnection(connectionString))
 {
     Console.WriteLine("conectado!");
-    conn.Open();
+    connection.Open();
 
-    var category = new Category();
-    category.Description = "Amazon AWS  sw";
-    category.Featured = false;
-    category.Id = Guid.NewGuid();
-    category.Order = 8;
-    category.Summary = "AWS amaxon";
-    category.Title = "Amazon server";
-    category.Url = "amazon";
-
-
-    var insertSql = "INSERT INTO [Category] values (@Id, @Title, @Url, @Summary , @Order ,@Description ,@Featured)";
 
     using (var comamnd = new SqlCommand())
     {
+        UpdateCatagory(connection);
 
-      var rows =   conn.Execute(insertSql, new
-        {
-            category.Description,
-        category.Featured ,
-        category.Id ,
-        category.Order ,
-        category.Summary ,
-        category.Title ,
-        category.Url ,
-    });
-Console.WriteLine($"{rows} linhas inseridas ");
-        var categories = conn.Query<Category>("Select [Id],[Title] from [Category]");
+        ListCategories(connection);
+
+    }
+}
+
+static void ListCategories(SqlConnection connection)
+{
+    var categories = connection.Query<Category>("Select [Id],[Title] from [Category]");
 
     foreach (var categorie in categories)
     {
         Console.WriteLine($"{categorie.Id} - {categorie.Title}");
     }
-
-}
 }
 
+static void CreateCategory(SqlConnection connection)
+{
+
+    var category = new Category();
+    category.Description = "Amazon AWS  sw2";
+    category.Featured = false;
+    category.Id = Guid.NewGuid();
+    category.Order = 8;
+    category.Summary = "AWS amaxon2";
+    category.Title = "Amazon server2";
+    category.Url = "amazon2";
 
 
-Console.WriteLine("Hello, World!");
+    var insertSql = "INSERT INTO [Category] values (@Id, @Title, @Url, @Summary , @Order ,@Description ,@Featured)";
+    var rows = connection.Execute(insertSql, new
+    {
+        category.Description,
+        category.Featured,
+        category.Id,
+        category.Order,
+        category.Summary,
+        category.Title,
+        category.Url,
+    });
+    Console.WriteLine($"{rows} linhas inseridas ");
+}
+
+static void UpdateCatagory(SqlConnection connection)
+{
+    var updateQuery = "Update [Category] set [Title]=@title where [Id]=@id";
+
+    var rows = connection.Execute(updateQuery, new
+    {
+        id = new Guid("af3407aa-11ae-4621-a2ef-2028b85507c4"),
+        title = "Front End  2023 "
+    });
+    Console.WriteLine($"{rows} +  registros atualizados");
+}
+
+
